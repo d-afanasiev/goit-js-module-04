@@ -1,25 +1,28 @@
-// // Колбэк-функция
-// function greet(name) {
-//   consle.log(`Добро пожаловать ${name}.`);
-// }
-
-// // Функция высшего порядка
 // function registerGuest(name, callback) {
 //   console.log(`Регистрируем гостя ${name}.`);
 //   callback(name);
 // }
 
-// registerGuest("Манго", greet);
+// // Передаём инлайн функцию greet как колбэк
+// registerGuest("Манго", function greet(name) {
+//   consle.log(`Добро пожаловать ${name}.`);
+// });
 
-function deliverPizza(pizzaName) {
-  return `Доставляем пиццу ${pizzaName}.`;
+// // Передаём инлайн функцию notify как колбэк
+// registerGuest("Поли", function notify(name) {
+//   consle.log(`Уважаемый(ая) ${name}, ваш номер будет готов через 30 минут.`);
+// });
+
+function makePizza(pizzaName, callback) {
+  console.log(`Пицца ${pizzaName} готовится, ожидайте...`);
+  callback(pizzaName);
 }
 
-function makePizza(pizzaName) {
-  return `Пицца ${pizzaName} готовится, ожидайте...`;
-}
-
+makePizza("Роял гранд", function deliverPizza(pizzaName) {
+  console.log(`Доставляем пиццу ${pizzaName}.`);
+});
 // Пиши код ниже этой строки
-function makeMessage(pizzaName, callback) {
-  return callback(pizzaName);
-}
+
+makePizza("Ультрасыр", function eatPizza(pizzaName) {
+  console.log(`Едим пиццу ${pizzaName}`);
+});
