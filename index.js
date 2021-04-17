@@ -1,26 +1,31 @@
-// function greetGuest(greeting) {
-//   console.log(`${greeting}, ${this.username}.`);
+// function greet(clientName) {
+//   return `${clientName}, добро пожаловать в «${this.service}».`;
 // }
 
-// const mango = { username: "Манго" };
-// const poly = { username: "Поли" };
+// const steam = { service: "Steam" };
+// const steamGreeter = greet.bind(steam);
+// steamGreeter("Манго"); // "Манго, добро пожаловать в «Steam»."
 
-// greetGuest.apply(mango, ["Добро пожаловать"]); // Добро пожаловать, Манго.
-// greetGuest.apply(poly, ["С приездом"]); // С приездом, Поли.
+// const gmail = { service: "Gmail" };
+// const gmailGreeter = greet.bind(gmail);
+// gmailGreeter("Поли"); // "Поли, добро пожаловать в «Gmail»."
 
-const orders = [
-  { email: "solomon@topmail.ua", dish: "Burger" },
-  { email: "artemis@coldmail.net", dish: "Pizza" },
-  { email: "jacob@mail.com", dish: "Taco" },
-];
+const pizzaPalace = {
+  company: "Pizza Palace",
+};
 
-// Пиши код ниже этой строки
-function composeMessage(position) {
-  return `Готовим ${this.dish} для ${this.email}. Ваш заказ ${position}-й в очереди.`;
+const burgerShack = {
+  company: "Burger Shack",
+};
+
+function composeMessage(customerName) {
+  return `${customerName}, всегда рады вас видеть в «${this.company}».`;
 }
+// Пиши код ниже этой строки
 
-const messages = orders.map((order, index) =>
-  composeMessage.apply(order, [index + 1])
-);
+const pizzaPalaceComposer = composeMessage.bind(pizzaPalace);
+const pizzaPalaceMessage = pizzaPalaceComposer("Манго");
 
-console.log(messages);
+const burgerShackComposer = composeMessage.bind(burgerShack);
+const burgerShackMessage = burgerShackComposer("Поли");
+console.log(pizzaPalaceMessage, burgerShackMessage);
