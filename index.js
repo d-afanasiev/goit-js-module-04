@@ -1,32 +1,30 @@
-// const bookShelf = {
-//   authors: ["Бернард Корнуэлл", "Роберт Шекли"],
-//   getAuthors() {
-//     return this.authors;
-//   },
-//   addAuthor(authorName) {
-//     this.authors.push(authorName);
-//   },
-// };
-
-// console.log(bookShelf.getAuthors()); // ['Бернард Корнуэлл', 'Роберт Шекли']
-// bookShelf.addAuthor("Ли Танит");
-// console.log(bookShelf.getAuthors()); // ['Бернард Корнуэлл', 'Роберт Шекли', 'Ли Танит']
-
-const pizzaPalace = {
-  pizzas: ["Ультрасыр", "Аль Копчино", "Четыре нарезона"],
+const customer = {
+  username: "Mango",
+  balance: 24000,
+  discount: 0.1,
+  orders: ["Burger", "Pizza", "Salad"],
   // Пиши код ниже этой строки
-  checkPizza(pizzaName) {
-    return this.pizzas.includes(pizzaName);
+  getBalance() {
+    return this.balance;
   },
-  order(pizzaName) {
-    const isPizzaAvailable = this.checkPizza(pizzaName);
-
-    if (!isPizzaAvailable) {
-      return `В ассортименте нет пиццы с названием «${pizzaName}».`;
-    }
-
-    return `Заказ принят, готовим пиццу «${pizzaName}».`;
+  getDiscount() {
+    return this.discount;
+  },
+  setDiscount(value) {
+    this.discount = value;
+  },
+  getOrders() {
+    return this.orders;
+  },
+  addOrder(cost, order) {
+    this.balance -= cost - cost * discount;
+    this.orders.push(order);
   },
   // Пиши код выше этой строки
 };
 
+customer.setDiscount(0.15);
+console.log(customer.getDiscount()); // 0.15
+customer.addOrder(5000, "Steak");
+console.log(customer.getBalance()); // 19750
+console.log(customer.getOrders()); // ['Burger', 'Pizza', 'Salad', 'Steak']
