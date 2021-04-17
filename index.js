@@ -1,31 +1,52 @@
-// function greet(clientName) {
-//   return `${clientName}, добро пожаловать в «${this.service}».`;
+// const customer = {
+//   firstName: "Jacob",
+//   lastName: "Mercer",
+//   getFullName() {
+//     return `${this.firstName} ${this.lastName}`;
+//   },
+// };
+
+// function makeMessage(callback) {
+//   // callback() это вызов метода getFullName без объекта
+//   console.log(`Обрабатываем заявку от ${callback()}.`);
 // }
 
-// const steam = { service: "Steam" };
-// const steamGreeter = greet.bind(steam);
-// steamGreeter("Манго"); // "Манго, добро пожаловать в «Steam»."
+// makeMessage(customer.getFullName); // Будет ошибка при вызове функции
 
-// const gmail = { service: "Gmail" };
-// const gmailGreeter = greet.bind(gmail);
-// gmailGreeter("Поли"); // "Поли, добро пожаловать в «Gmail»."
+// // ❌ Было
+// makeMessage(customer.getFullName); // Будет ошибка при вызове функции
 
-const pizzaPalace = {
-  company: "Pizza Palace",
+// // ✅ Стало
+// makeMessage(customer.getFullName.bind(customer)); // Обрабатываем заявку от Jacob Mercer.
+
+const service = {
+  mailingList: ['mango@mail.com', 'poly@hotmail.de', 'ajax@jmail.net'],
+  subscribe(email) {
+    this.mailingList.push(email);
+    return `Почта ${email} добавлена в рассылку.`;
+  },
+  unsubscribe(email) {
+    this.mailingList = this.mailingList.filter((e) => e !== email);
+    return `Почта ${email} удалена из рассылки.`;
+  },
 };
 
-const burgerShack = {
-  company: "Burger Shack",
-};
-
-function composeMessage(customerName) {
-  return `${customerName}, всегда рады вас видеть в «${this.company}».`;
+function logAndInvokeAction(email, action) {
+  console.log(`Выполняем действие с ${email}.`);
+  return action(email);
 }
-// Пиши код ниже этой строки
 
-const pizzaPalaceComposer = composeMessage.bind(pizzaPalace);
-const pizzaPalaceMessage = pizzaPalaceComposer("Манго");
+const firstInvoke = logAndInvokeAction('kiwi@mail.uk', service.subscribe.bind(service));
+console.log(firstInvoke);
+// Почта kiwi@mail.uk добавлена в рассылку.
 
-const burgerShackComposer = composeMessage.bind(burgerShack);
-const burgerShackMessage = burgerShackComposer("Поли");
-console.log(pizzaPalaceMessage, burgerShackMessage);
+console.log(service.mailingList);
+/* ['mango@mail.com', 
+    'poly@hotmail.de', 
+    'ajax@jmail.net', 
+    'kiwi@mail.uk']*/
+const secondInvoke = logAndInvokeAction('poly@hotmail.de', service.unsubscribe.bind(service));
+console.log(secondInvoke);
+// Почта poly@hotmail.de удалена из рассылки.
+
+console.log(service.mailingList); // ['mango@mail.com', 'ajax@jmail.net', 'kiwi@mail.uk']
