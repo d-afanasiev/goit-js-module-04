@@ -1,26 +1,25 @@
+// // Колбэк-функция
 // function greet(name) {
-//   return `Добро пожаловать ${name}.`;
+//   consle.log(`Добро пожаловать ${name}.`);
 // }
 
-// /* Вызываем функцию greet 
-//    и выводим результат в консоль */
-// console.log(greet("Манго"));
-// // Добро пожаловать Манго.
+// // Функция высшего порядка
+// function registerGuest(name, callback) {
+//   console.log(`Регистрируем гостя ${name}.`);
+//   callback(name);
+// }
 
-// /* Выводим функцию greet 
-//    в консоль не вызывая её */
-// console.log(greet);
-// /* 
-// ƒ greet() { 
-//      return `Добро пожаловать ${name}.`; 
-// } 
-// */
+// registerGuest("Манго", greet);
 
-
-function makePizza() {
-  return "Ваша пицца готовится, ожидайте.";
+function deliverPizza(pizzaName) {
+  return `Доставляем пиццу ${pizzaName}.`;
 }
-// Пиши код ниже этой строки
 
-const result = makePizza();
-const pointer = makePizza;
+function makePizza(pizzaName) {
+  return `Пицца ${pizzaName} готовится, ожидайте...`;
+}
+
+// Пиши код ниже этой строки
+function makeMessage(pizzaName, callback) {
+  return callback(pizzaName);
+}
