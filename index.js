@@ -8,7 +8,6 @@
 // greetGuest.apply(mango, ["Добро пожаловать"]); // Добро пожаловать, Манго.
 // greetGuest.apply(poly, ["С приездом"]); // С приездом, Поли.
 
-
 const orders = [
   { email: "solomon@topmail.ua", dish: "Burger" },
   { email: "artemis@coldmail.net", dish: "Pizza" },
